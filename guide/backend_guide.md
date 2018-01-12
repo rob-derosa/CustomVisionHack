@@ -2,7 +2,7 @@
 
 In this hack, we're going to show how to spin up your own Functions App backend and a Xamarin Mobile App front-end in a few steps with the intent of using Cognitive Services Custom Vision AI to identify custom-trained objects, blob storage to store our images, and Cosmos DB to track the results.
 
-Visual Studio 2017 on Windows is required to build and publish the backend Azure Functions App. The mobile app project can be built and run using either an iOS or Android device. A device is preferred because we intend to use the camera to take pictures but an emulator/simulator will work as well. If you are not able to build and run the mobile app project due to technical limitations, you can download and install a pre-built version of the app to your device (see step 12.b) and enter your Functions app endpoint URL to utilize your own edpoint.
+Visual Studio 2017 on Windows is required to build and publish the backend Azure Functions App. The mobile app project can be built and run using either an iOS or Android device. A device is preferred because we intend to use the camera to take pictures but an emulator/simulator will work as well. If you are not able to build and run the mobile app project due to technical limitations, you can download and install a pre-built version of the app to your device (see [step 12.b](#step-12b-install-a-prebuilt-version-of-the-mobile-app)) and enter your Functions app endpoint URL to utilize your own edpoint.
 
 __A few notes on Custom Vision__
 - We're going to use the web interface to train our classifiers for this hack but this can and should be done programatically using an SDK or the REST API
@@ -27,7 +27,7 @@ __A few notes on Custom Vision__
    - Mobile Development with .NET
    - Azure Development
    - (Extension) Azure Functions and Web Jobs Tools version 15.0.31201.0 or higher
-1. Visual Studio for Mac (optional for Android, required for iOS)
+1. [Visual Studio for Mac](https://www.visualstudio.com/downloads/) (optional for Android, required for iOS)
 1. [Postman](https://www.getpostman.com/)
 
 ### Table of Contents
