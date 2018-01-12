@@ -8,7 +8,7 @@ __A few notes on Custom Vision__
 - We're going to use the web interface to train our classifiers for this hack but this can and should be done programatically using an SDK or the REST API
 - To increase the accuracy of your predictions:
    - Add more images of your object in different angles, lighting, environments and situations where you anticipate your object may be tested against
-   - Add more images of things that are NOT your object and tag them with other data - the classifier needs to understand what your object is not, too)
+   - Add more images of things that are NOT your object and tag them with other data - the classifier needs to understand what your object is not, too
    - Only test against objects/models that exist within your project - you may get misfires if you test against an object you have not trained
 
 
@@ -30,8 +30,27 @@ __A few notes on Custom Vision__
 1. Visual Studio for Mac (optional for Android, required for iOS)
 1. [Postman](https://www.getpostman.com/)
 
+### Table of Contents
 
-### Step 1: Clone the Repo
+1. [Clone the repo](#step-1-clone-the-repo)
+1. [Create a new Azure Function App](#step-2-create-a-new-azure-function-app)
+1. [Create a Function App solution in Visual Studio 2017](#step-3-create-a-function-app-solution-in-visual-studio-2017)
+1. [Publish your app to the cloud and verify](#step-4-publish-your-app-to-the-cloud-and-verify)
+1. [Create your Storage Account (Blob)](#step-5-create-your-storage-account-blob)
+1. [Generate a Shared Access Signature for your Storage Account](#step-6-generate-a-shared-access-signature-for-your-storage-account)
+1. [Upload an image/byte[] to your blob storage account](#step-7-upload-an-imagebyte-to-your-blob-storage-account)
+1. [Create a Azure Cosmos DB account](#step-8-create-a-azure-cosmos-db)
+1. [Write a document to your Cosmos SQL Database](#step-9-write-a-document-to-your-cosmos-sql-database)
+1. [Set up your own Custom Vision project and train a classifier](#step-10-set-up-your-own-custom-vision-project-and-train-a-classifier)
+1. [Make a prediction with Custom Vision and log the results](#step-11-make-a-prediction-with-custom-vision-and-log-the-results)
+1. [Connect the mobile front-end to the Functions backend](#step-12-connect-the-mobile-front-end-to-the-functions-backend)
+   1. [Install a prebuilt version of the mobile app](#step-12b-install-a-prebuilt-version-of-the-mobile-app)
+1. [Add another function that returns a list of past predictions](#step-13-add-another-function-that-returns-a-list-of-past-predictions)
+1. [Add a new tabbed page to the mobile app and display a list of past predictions](#step-14-add-a-new-tabbed-page-to-the-mobile-app-and-display-a-list-of-past-predictions)
+
+
+
+### Step 1: Clone the repo
 
 Make a local directory, and then clone the repo from [https://github.com/rob-derosa/customvisionhack](https://github.com/rob-derosa/customvisionhack)
 
@@ -45,8 +64,7 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
 <br/><img src="resources/portal_create_new_functions_app.png" width="75%" />
 1. Enter in a name for the app (e.g. `myfunctionsapp` - this must be unique but don't worry, the portal will tell you if it's not)
 1. Choose your Azure Subscription
-1. Choose "Create new" for the resource group and copy the same value you used for your app name into the Resource Group Name field (we'll create all of our resources under this same Resource Group)
-1. Choose "Use existing", and select the resource group you created in the previous section
+1. Choose "Create new" for the resource group and give it a unique name (we'll create all of our resources under this same Resource Group)
 1. Choose a region (any region is fine)
 1. Leave the rest of the settings as default
 1. Optionally, for easy access, click the "Pin to dashboard" checkbox
@@ -67,7 +85,7 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
   1. Close out and exit Visual Studio so the update can install
      1. Click the "Modify" button when the prompt shows
   1. Once the update completes, restart Visual Studio
-1. In Visual Studio, click File > Open > Project/Solution... and select the empty solution located in the cloned repo `NikeHack/src/StartHere/MyBackendApp.sln`
+1. In Visual Studio, click File > Open > Project/Solution... and select the empty solution located in the cloned repo `/src/start_here/MyBackendApp.sln`
 1. Right-click on the Solution node in Solution Explorer and select Add > New Project...
 <br/><img src="resources/vs_add_new_project_menu.png" width="75%" />
 1. Under Visual C#, choose Cloud > Azure Functions
@@ -78,7 +96,7 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
    1. this will create a boilerplate function called `Function1` 1. we will replace this function with a real one shortly
 1. Test out the function by clicking the Run/Debug button in Visual Studio
    1. You may be prompted to download and install the Azure Functions CLI tools 1. click the "Yes" button to accept
-1. Use Postman or a browser to make a GET request to the function (e.g. `http://localhost:7071/api/Function1?name=Rob`) and verify the ouput `Hello, Rob`, for example
+1. Use Postman or a browser to make a GET request to the function (e.g. `http://localhost:7071/api/Function1?name=Rob`) and verify the ouput (e.g. `Hello, Rob`)
 <br/><img src="resources/postman_verify_function1.png" width="75%" />
 
 
@@ -100,7 +118,7 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
    <br/><img src="resources/vs_publish_profile_settings.png" width="50%" />
 1. Click the "Publish" button
    1. If you get a warning indicating the version remotely doesn't match the local version, accept by clicking "Yes"
-1. Copy the site URL and verify the function is running by using Postman to send that same GET request against the remote instance (e.g. `http://myfunctionsapp.azurewebsites.net/api/Function1?name=Rob`) and verify the ouput `Hello, Rob`
+1. Copy the site URL and verify the function is running by using Postman to send that same GET request against the remote instance (e.g. `http://myfunctionsapp.azurewebsites.net/api/Function1?name=Rob`) and verify the ouput (e.g. `Hello, Rob`)
 <br/><img src="resources/vs_publish_profile_site_link.png" width="65%" />
 
 
@@ -160,7 +178,7 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
 1. Publish to the cloud and verify this remotely following the steps outlined above
 
 
-### Step 8: Create a Azure Cosmos DB
+### Step 8: Create a Azure Cosmos DB account
 
 1. Once again, browse to [https://portal.azure.com](https://portal.azure.com)
 1. In the top left, click Create Resource > Databases > Azure Cosmos DB
@@ -292,7 +310,7 @@ __Note:__ You can build the mobile front end using either Visual Studio for Wind
 
 __Note:__ This step is for those that cannot build the mobile app - it is configurable to point to any Azure endpoint
 
-1. On the device you want to install the app on, navigate to http://install.appcenter.ms/nikehackathon
+1. On the device you want to install the app on, navigate to http://install.appcenter.ms/customvision
 1. Click on the "Install" button
 1. If the device is iOS:
    1. You will need to trust the enterprise signing certificate by by opening the Settings App
