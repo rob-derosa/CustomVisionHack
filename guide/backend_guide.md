@@ -310,7 +310,7 @@ __Note:__ You can build the mobile front end using either Visual Studio for Wind
 
 __Note:__ This step is for those that cannot build the mobile app - it is configurable to point to any Azure endpoint
 
-1. On the device you want to install the app on, navigate to http://install.appcenter.ms/customvision
+1. On the device you want to install the app on, navigate to http://install.appcenter.ms/thisIsNotARealLinkYet
 1. Click on the "Install" button
 1. If the device is iOS:
    1. You will need to trust the enterprise signing certificate by by opening the Settings App
