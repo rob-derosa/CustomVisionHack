@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="MyMobileApp.Common.PredictionDetailsPage"
+	Title="{Binding Title}">
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Text="Reset"
+			Command="{Binding ResetDataCommand}" />
+	</ContentPage.ToolbarItems>
+	<ContentPage.Content>
+		<ScrollView>
+			<Grid Margin="10">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="*" />
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+
+				<Button Text="Take Picture"
+					Margin="0,30,0,0"
+					Command="{Binding TakePictureCommand}"
+					VerticalOptions="Center"
+					HorizontalOptions="Center"
+					WidthRequest="200"
+					HeightRequest="300" />
+
+				<Image Source="{Binding ImageSource}"
+					IsVisible="{Binding HasImageSource}"
+					Margin="0,30,0,0"
+					Aspect="AspectFill"
+					HorizontalOptions="Center"
+					VerticalOptions="Center"
+					WidthRequest="200"
+					HeightRequest="300" />
+
+				<StackLayout Orientation="Horizontal"
+					HorizontalOptions="Center"
+					Grid.Row="1"
+					Spacing="10">
+
+					<ActivityIndicator IsRunning="{Binding IsBusy}"
+						IsVisible="{Binding IsBusy}"/>
+					
+					<Label Text="{Binding Status}"
+						VerticalOptions="Center"
+						FontSize="Small"
+						Margin="10,0"
+						HorizontalTextAlignment="Center" />
+				</StackLayout>
+
+				<Button Text="Make Prediction"
+					Command="{Binding MakePredictionCommand}"
+					Grid.Row="2" />
+			</Grid>
+		</ScrollView>
+	</ContentPage.Content>
+</ContentPage>

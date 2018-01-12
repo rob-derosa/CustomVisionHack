@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="MyMobileApp.Common.SettingsPage"
+	Title="{Binding Title}">
+	<ContentPage.Content>
+
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+			<StackLayout VerticalOptions="Center">
+				<Entry Placeholder="Azure Functions Url"
+					Text="{Binding AzureFunctionsUrl}"
+					Keyboard="Url"
+					HorizontalOptions="Fill"
+					Margin="20" />
+				
+			</StackLayout>
+
+			<Button Text="Save"
+				Margin="10"
+				Grid.Row="1"
+				Command="{Binding SaveCommand}" />
+		</Grid>
+	</ContentPage.Content>
+</ContentPage>

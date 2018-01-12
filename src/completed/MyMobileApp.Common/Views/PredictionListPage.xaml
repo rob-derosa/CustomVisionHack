@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="MyMobileApp.Common.PredictionListPage"
+	Title="{Binding Title}" x:Name="PredictionListPage">
+	<ContentPage.Content>
+		<!-- We're binding the source of the items/rows to the Items collection in our ViewModel/BindingContext  -->
+		<ListView x:Name="listView"
+			ItemsSource="{Binding Items}"
+			VerticalOptions="FillAndExpand"
+			HasUnevenRows="false"
+			RowHeight="150" 
+			IsPullToRefreshEnabled="true"
+			RefreshCommand="{Binding LoadItemsCommand}"
+			IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+			CachingStrategy="RecycleElement">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<ViewCell>
+						<!-- This is the UI that will appear in each row/cell -->
+						<StackLayout Orientation="Horizontal">
+							<Image WidthRequest="120"
+								HeightRequest="150">
+								<Image.Source>
+									<UriImageSource Uri="{Binding ImageUrl}" 
+										CacheValidity="14"
+										CachingEnabled="true"/>
+								</Image.Source>
+							</Image>
+							<StackLayout Padding="10">
+								<Label Text="{Binding Description}"
+									LineBreakMode="WordWrap"
+									FontSize="Medium" />
+							</StackLayout>
+						</StackLayout>
+					</ViewCell>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+	</ContentPage.Content>
+</ContentPage>

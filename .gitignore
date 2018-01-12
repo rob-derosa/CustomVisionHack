@@ -1,0 +1,16 @@
+*/packages
+*\packages
+*/bin
+*/obj
+*\bin
+*\obj
+*.cache
+*.userpref
+*/.vs
+/.vs
+*/PublishProfiles
+*.userprefs
+*.user
+*.lock.json
+*.vs
+*.pubxml
