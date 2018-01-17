@@ -325,7 +325,7 @@ __Note:__ This step is for those that cannot build the mobile app - it is config
 
 ### Step 13: Add another function that returns a list of past predictions
 
-1. In Visual Studio right-click on your functions project and selct Add > Class... > Azure Function
+1. In Visual Studio, right-click on your functions project and selct Add > Class... > Azure Function
    1. Name the function "GetPredictions" and click the "Add" button
    1. Leave the trigger type as Http trigger but change the Access rights to "Anonymous"
    1. Click the "OK" button
