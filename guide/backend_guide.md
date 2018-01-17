@@ -53,7 +53,7 @@ __A few notes on Custom Vision__
 
 - __Name__: All resources will require a unique name and almost always impose some limitations on the characters allowed. In many cases, this also serves as part of the host name. For example, the name `myfunctionsapp` would equate to `http://myfunctionsapp.azurewebsites.net` 
 - __Subscription__: Select your Azure subscription in the dropdown list - this is where any services you use will be billed.
-- __Resource Groups__: Resource groups provide a way to monitor, control access, provision and manage billing for collections of assets that are required to run an application. Each resource you create in Azure will require a parent resource group. For this hack, you should use the same resource group for all your resources.
+- __Resource Groups__: Resource groups provide a way to monitor, control access, provision and manage billing for collections of assets that are required to run an application. Each resource you create in Azure will require a parent resource group. For this hack, you should use the same resource group for all your resources. If this is the first resource you are creating, select __Create New__, otherwise choose __Use Existing__ and select the original resource group you created.
 - __Location__: Select a region to deploy your resources. Typically this would be a region closest to your intended user base.
 
 
@@ -70,9 +70,8 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
 1. In the top left, click Create Resource > Compute > Function App
 <br/><img src="resources/portal_create_new_functions_app.png" width="75%" />
 1. Enter in a name for the app (e.g. `myfunctionsapp` - this must be unique but don't worry, the portal will tell you if it's not)
-1. Choose your Azure Subscription
-1. Choose "Create new" for the resource group and give it a unique name (we'll create all of our resources under this same Resource Group)
-1. Choose a region (any region is fine)
+1. Because this is the very first resource we are creating, we need to create a new resource group
+1. Complete the new resource [common form fields](#azure-portal-tips)
 1. Leave the rest of the settings as default
 1. Optionally, for easy access, click the "Pin to dashboard" checkbox
 1. Click "Create" to create your Function App
@@ -134,11 +133,8 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
 1. Once again, browse to [https://portal.azure.com](https://portal.azure.com)
 1. Click "Create Resource" from the menu on the left of the page, then search for "Storage Account" and click "Create"
 <br/><img src="resources/portal_create_new_storage_account.png" width="75%" />
-1. Enter in a name for the storage account (e.g. `mystorageaccount`)
-1. From th "Account Kind" dropdown, select "Blob"
-1. Choose your Azure Subscription
-1. Choose "Use existing", and select the resource group you created in the previous section
-1. Choose a region (any region is fine)
+1. Complete the new resource [common form fields](#azure-portal-tips)
+1. From the "Account Kind" dropdown, select "Blob"
 1. Click "Create" to create the Storage Account
 <br/><img src="resources/portal_create_new_storage_account_settings.png" width="75%" />
 1. Once your storage account has been created, we need to create a new container to house our images
@@ -190,11 +186,8 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
 1. Once again, browse to [https://portal.azure.com](https://portal.azure.com)
 1. In the top left, click Create Resource > Databases > Azure Cosmos DB
 <br/><img src="resources/portal_create_new_cosmos_database.png" />
-1. Enter in a name for the database (e.g. `mycosmosdatabase`)
+1. Complete the new resource [common form fields](#azure-portal-tips)
 1. Choose the `SQL` from the API dropdown 1. this will use DocumentDB under the hood
-1. Choose your Azure Subscription
-1. Choose "Use existing", and select the resource group you created in the previous section
-1. Choose a region (any region is fine)
 1. Click "Create" to create the Cosmos DB
 <br/><img src="resources/portal_create_new_cosmos_database_settings.png" />
 1. It can take a few minutes before this process completes
@@ -213,6 +206,7 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
    1. On the left side, choose Projects and check the box next to MyCommonLibrary
    1. Click the "OK" button
    <br/><img src="resources/vs_add_reference_common.png" width="75%" />
+1. Right-click on the MyCommonLibrary project and select Rebuild
 1. Right-click on your Functions app project and select Add > New Class... and name it "CosmosDataService.cs"
 1. Replace the empty class with the code from [this gist](https://gist.github.com/rob-derosa/d38e6a7c1bdba90b101a3e9ad7b6dfb6)
 1. Add the missing using statements
@@ -331,8 +325,7 @@ __Note:__ This step is for those that cannot build the mobile app - it is config
 
 ### Step 13: Add another function that returns a list of past predictions
 
-1. In Visual Studio in the MyFunctionsApp solution, add a new function to your functions project
-   1. Right-click on your functions project and selct Add > Class... > Azure Function
+1. In Visual Studio right-click on your functions project and selct Add > Class... > Azure Function
    1. Name the function "GetPredictions" and click the "Add" button
    1. Leave the trigger type as Http trigger but change the Access rights to "Anonymous"
    1. Click the "OK" button
