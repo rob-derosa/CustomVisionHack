@@ -49,6 +49,13 @@ __A few notes on Custom Vision__
 1. [Add a new tabbed page to the mobile app and display a list of past predictions](#step-14-add-a-new-tabbed-page-to-the-mobile-app-and-display-a-list-of-past-predictions)
 
 
+#### Azure Portal Tips
+
+- __Name__: All resources will require a unique name and almost always impose some limitations on the characters allowed. In many cases, this also serves as part of the host name. For example, the name `myfunctionsapp` would equate to `http://myfunctionsapp.azurewebsites.net` 
+- __Subscription__: Select your Azure subscription in the dropdown list - this is where any services you use will be billed.
+- __Resource Groups__: Resource groups provide a way to monitor, control access, provision and manage billing for collections of assets that are required to run an application. Each resource you create in Azure will require a parent resource group. For this hack, you should use the same resource group for all your resources.
+- __Location__: Select a region to deploy your resources. Typically this would be a region closest to your intended user base.
+
 
 ### Step 1: Clone the repo
 
