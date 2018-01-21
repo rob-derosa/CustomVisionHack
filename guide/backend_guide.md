@@ -198,15 +198,15 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
 1. Back in Visual Studio, right-click on the project's __Dependencies__ node and choose __Manage Nuget Packages...__
 1. Click on the __Browse__ tab and search for __DocumentDB__
 1. Select the __Microsoft.Azure.DocumentDB.Core__ and ensure version 1.7.1 is selected and click __Install__
-1. Add the MyCommonLibrary project to your solution
+1. Add the `MyCommonLibrary` project to your solution - this project contains model classes that we will share between our front and back ends
    1. Right-click on the solution and select Add > Existing Project... and navigate to the parent folder and select MyCommonLibrary.csproj
-1. Add a reference to the MyCommonLibrary project to your Function App project
+1. Add a reference to the `MyCommonLibrary` project to your Function App project
    - __Note:__ This is a .NET Standard library that contains classes/models shared between the front and back ends
    1. Right click on the Dependencies node of the Functions app and select Add Reference...
-   1. On the left side, choose Projects and check the box next to MyCommonLibrary
+   1. On the left side, choose Projects and check the box next to `MyCommonLibrary`
    1. Click the __OK__ button
    <br/><img src="resources/vs_add_reference_common.png" width="75%" />
-1. Right-click on the MyCommonLibrary project and select Rebuild
+1. Right-click on the `MyCommonLibrary` project and select Rebuild
 1. Right-click on your Functions app project and select Add > New Class... and name it __CosmosDataService.cs__
 1. Replace the empty class with the code from [this gist](https://gist.github.com/rob-derosa/d38e6a7c1bdba90b101a3e9ad7b6dfb6)
 1. Add the missing using statements
@@ -311,7 +311,7 @@ __Note:__ You can build the mobile front end using either Visual Studio for Wind
 
 __Note:__ This step is for those that cannot build the mobile app - it is configurable to point to any Azure endpoint
 
-1. On the device you want to install the app on, navigate to http://install.appcenter.ms/thisIsNotARealLinkYet
+1. On the device you want to install the app on, navigate [here for iOS](https://install.appcenter.ms/users/robd/apps/custom-vision-hack/distribution_groups/public) or [here for Android](https://install.appcenter.ms/users/robd/apps/custom-vision-hack-1/distribution_groups/public)
 1. Click on the __Install__ button
 1. If the device is iOS:
    1. You will need to trust the enterprise signing certificate by by opening the Settings App
@@ -325,7 +325,7 @@ __Note:__ This step is for those that cannot build the mobile app - it is config
 
 ### Step 13: Add another function that returns a list of past predictions
 
-1. In Visual Studio, right-click on your functions project and selct Add > Class... > Azure Function
+1. In Visual Studio, right-click on your functions project and selct __Add > Class... > Azure Function__
    1. Name the function __GetPredictions__ and click the __Add__ button
    1. Leave the trigger type as Http trigger but change the Access rights to __Anonymous__
    1. Click the __OK__ button
