@@ -47,7 +47,7 @@ __A few notes on Custom Vision__
    1. [Install a prebuilt version of the mobile app](#step-12b-install-a-prebuilt-version-of-the-mobile-app)
 1. [Add another function that returns a list of past predictions](#step-13-add-another-function-that-returns-a-list-of-past-predictions)
 1. [Add a new tabbed page to the mobile app and display a list of past predictions](#step-14-add-a-new-tabbed-page-to-the-mobile-app-and-display-a-list-of-past-predictions)
-
+1. [Bonus - create a compact model and use it locally in an iOS CoreML project]()
 
 #### Azure Portal Tips
 
@@ -161,14 +161,14 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
 ### Step 7: Upload an image/byte[] to your blob storage account
 
 1. Back in Visual Studio, change the method name and file name of `Function1` to `MakePrediction`
-1. Also change the value of the `FunctionName` attribute to `nameof(MakePrediction)`
-1. In the method signature, change the HttpTrigger methods params from `__post__, __get__` to just `__post__`
+1. Also change the value of the `FunctionName` attribute to `nameof(MakePrediction)` - this essentially just passes in the name of the method as a string to define our endpoint equivalant to `"MakePrediction"`
+1. In the method signature, change the HttpTrigger methods params from `"post", "get"` to just `"post"`
 1. Right-click on the project's __Dependencies__ node and choose __Manage Nuget Packages...__
 1. Click on the __Browse__ tab and search for __Azure Storage__
 1. Select the __WindowsAzure.Storage__ and change the version dropdown to v8.3.0 and click __Install__
 1. Follow the instructions in [this gist](https://gist.github.com/rob-derosa/87e59e3dac93882f29f8fd4fa246ff3d)
 1. Add the missing using statements
-1. Back in Visual Studio, update line 43 to incorporate both your storage SAS URL and the container name
+1. Back in Visual Studio, update line 43 to incorporate both your storage SAS URL __AND THE CONTAINER NAME__ - you need to ensure the URL you copy and paste incorporates the `{containerName}` code after the `.net/` and before the `?sv=2018...`, otherwise you'll likely see a 404 error
 1. Build and run the project locally
 1. Verify this by using Postman to send a POST request to your local endpoint
     1. Set the method dropdown to `POST`
@@ -357,6 +357,15 @@ __Note:__ This step is for those that cannot build the mobile app - it is config
       - If you run into issues, you can reference [this code](https://github.com/rob-derosa/CustomVisionHack/blob/master/src/completed/MyMobileApp.Common/Views/MainPage.cs) as an example
 1. Rebuild the project, deploy to your device and select the new tab you just created
 1. You should see a list of photos with their matching tags 
+
+
+### Step 15: Bonus - create a compact model and use it locally in an iOS CoreML projec
+1. Navigate to [http://customvision.com/ai](http://customvision.com/ai) and select your project
+1. Click on the __PERFORMANCE__ tab and select the most recent iteration
+1. Click on the __Export__ button and choose __iOS 11 (CoreML)__ then click the __Download__ button
+1. Open terminal and run the following command: `xcrun coremlcompiler compile <model_name>.mlmodel <output_directory_here>`
+1. Open the `/src/core_ml/CustomVision.sln` in Visual Studio
+1. Inside the folder...
 
 #### Attaching a remote debugger to your Azure Functions App
 
