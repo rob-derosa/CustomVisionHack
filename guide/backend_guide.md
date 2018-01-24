@@ -47,7 +47,6 @@ __A few notes on Custom Vision__
    1. [Install a prebuilt version of the mobile app](#step-12b-install-a-prebuilt-version-of-the-mobile-app)
 1. [Add another function that returns a list of past predictions](#step-13-add-another-function-that-returns-a-list-of-past-predictions)
 1. [Add a new tabbed page to the mobile app and display a list of past predictions](#step-14-add-a-new-tabbed-page-to-the-mobile-app-and-display-a-list-of-past-predictions)
-1. [Bonus - create a compact model and use it locally in an iOS CoreML project]()
 
 #### Azure Portal Tips
 
@@ -87,7 +86,7 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
 1. Launch Visual Studio and ensure your Azure Functions and Web Jobs Tools are updated to at version 15.0.31201.0
   1. Tools > Extensions and Updates > Expand the Updates node and select Visual Studio Marketplace
   1. Select Azure Functions and Web Jobs Tools and click the __Update__ button
-  <br/><img src="resources/vs_update_azure_tools.jpg__ width="75%" />
+  <br/><img src="resources/vs_update_azure_tools.jpg" width="75%" />
   1. Close out and exit Visual Studio so the update can install
      1. Click the __Modify__ button when the prompt shows
   1. Once the update completes, restart Visual Studio
@@ -105,7 +104,6 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
 1. Use Postman or a browser to make a GET request to the function (e.g. `http://localhost:7071/api/Function1?name=Rob`) and verify the ouput (e.g. `Hello, Rob`)
 <br/><img src="resources/postman_verify_function1.png" width="75%" />
 
-
 ### Step 4: Publish your app to the cloud and verify
 
 1. Right-click on your Functions project and select __Publish...__
@@ -122,7 +120,7 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
    <br/><img src="resources/vs_publish_profile_settings_link.png" width="65%" />
    1. Change the Configuration to __Debug__ and click __Save__
    <br/><img src="resources/vs_publish_profile_settings.png" width="50%" />
-1. Click the __Publish__ button
+1. Click the __Publish/Save__ button
    1. If you get a warning indicating the version remotely doesn't match the local version, accept by clicking __Yes__
 1. Copy the site URL and verify the function is running by using Postman to send that same GET request against the remote instance (e.g. `http://myfunctionsapp.azurewebsites.net/api/Function1?name=Rob`) and verify the ouput (e.g. `Hello, Rob`)
 <br/><img src="resources/vs_publish_profile_site_link.png" width="65%" />
@@ -172,7 +170,7 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
 1. Build and run the project locally
 1. Verify this by using Postman to send a POST request to your local endpoint
     1. Set the method dropdown to `POST`
-    1. Set your endpoint in the address bar
+    1. Set your endpoint in the address bar (e.g. `http://localhost:7071/api/MakePrediction`)
     1. Set the body content by selecting the __Body__ tab and choose the __binary__ option
     1. Choose a local image file to send
     1. Send the request and verify a URL comes back
@@ -207,7 +205,7 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
    1. Click the __OK__ button
    <br/><img src="resources/vs_add_reference_common.png" width="75%" />
 1. Right-click on the `MyCommonLibrary` project and select Rebuild
-1. Right-click on your Functions app project and select Add > New Class... and name it __CosmosDataService.cs__
+1. Right-click on your Functions app project and select Add > Class... and name it __CosmosDataService.cs__
 1. Replace the empty class with the code from [this gist](https://gist.github.com/rob-derosa/d38e6a7c1bdba90b101a3e9ad7b6dfb6)
 1. Add the missing using statements
 1. The `_databaseId` is the name of your database and the `_collectionId` is then name of the table/collection - feel free to change these
@@ -266,7 +264,7 @@ In this step, we will create a new Custom Vision project and classify a few diff
 
 Now that we have a custom vision project with at least 4 trained models, we can begin to make predictions against the classifier. For this, we will need the custom vision project ID as well as the training key.
 
-1. In Visual Studio, right-click on the project's __Dependencies__ node and choose __Manage Nuget Packages...__
+1. In Visual Studio, right-click on your Azure Functions project's __Dependencies__ node and choose __Manage Nuget Packages...__
 1. Click on the __Browse__ tab and search for __CustomVision__
 1. Select the __Microsoft.Cognitive.CustomVision.Prediction__ and change the version dropdown to v1.0.0 and click __Install__
 1. Select the __Microsoft.Cognitive.CustomVision.Training__ and change the version dropdown to v1.0.0 and click __Install__
@@ -358,14 +356,7 @@ __Note:__ This step is for those that cannot build the mobile app - it is config
 1. Rebuild the project, deploy to your device and select the new tab you just created
 1. You should see a list of photos with their matching tags 
 
-
-### Step 15: Bonus - create a compact model and use it locally in an iOS CoreML projec
-1. Navigate to [http://customvision.com/ai](http://customvision.com/ai) and select your project
-1. Click on the __PERFORMANCE__ tab and select the most recent iteration
-1. Click on the __Export__ button and choose __iOS 11 (CoreML)__ then click the __Download__ button
-1. Open terminal and run the following command: `xcrun coremlcompiler compile <model_name>.mlmodel <output_directory_here>`
-1. Open the `/src/core_ml/CustomVision.sln` in Visual Studio
-1. Inside the folder...
+t
 
 #### Attaching a remote debugger to your Azure Functions App
 
