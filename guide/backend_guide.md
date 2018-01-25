@@ -373,7 +373,7 @@ t
 
 #### References
 
-- Azure Functions
+- [Azure Functions](https://azure.microsoft.com/en-us/services/functions/)
 - Cosmos DB
 - Custom Vision
    - [Web Portal](http://customvision.ai)
