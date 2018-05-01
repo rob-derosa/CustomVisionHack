@@ -197,7 +197,7 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
 1. Click on the __Browse__ tab and search for __DocumentDB__
 1. Select the __Microsoft.Azure.DocumentDB.Core__ and ensure version 1.7.1 is selected and click __Install__
 1. Add the `MyCommonLibrary` project to your solution - this project contains model classes that we will share between our front and back ends
-   1. Right-click on the solution and select Add > Existing Project... and navigate to the parent folder and select MyCommonLibrary.csproj
+   1. Right-click on the solution and select Add > Existing Project... and navigate to the parent folder and select `MyCommonLibrary.csproj`
 1. Add a reference to the `MyCommonLibrary` project to your Function App project
    - __Note:__ This is a .NET Standard library that contains classes/models shared between the front and back ends
    1. Right click on the Dependencies node of the Functions app and select Add Reference...
@@ -205,7 +205,7 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
    1. Click the __OK__ button
    <br/><img src="resources/vs_add_reference_common.png" width="75%" />
 1. Right-click on the `MyCommonLibrary` project and select Rebuild
-1. Right-click on your Functions app project and select Add > Class... and name it __CosmosDataService.cs__
+1. Right-click on your Functions app project and select __Add > Class...__ and name it `CosmosDataService.cs`
 1. Replace the empty class with the code from [this gist](https://gist.github.com/rob-derosa/d38e6a7c1bdba90b101a3e9ad7b6dfb6)
 1. Add the missing using statements
 1. The `_databaseId` is the name of your database and the `_collectionId` is then name of the table/collection - feel free to change these
@@ -213,8 +213,8 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
 1. Now we need to get some values from the Azure Portal, such as our database URL and SAS key
    1. In the Azure portal, navigate to your Cosmos DB
    1. Click on Keys
-   1. In the Read-write Keys tab, copy the URI and paste it as the value of `_databaseUrl` in CosmosDataService.cs
-   1. In the Read-write Keys tab, copy the Primary Key and paste it as the value of `_databaseKey` in CosmosDataService.cs
+   1. In the Read-write Keys tab, copy the URI and paste it as the value of `_databaseUrl` in `CosmosDataService.cs`
+   1. In the Read-write Keys tab, copy the Primary Key and paste it as the value of `_databaseKey` in `CosmosDataService.cs`
 <br/><img src="resources/portal_cosmos_keys.png" />
 1. In MakePrediction.cs, replace the code in the `try` clause with the code in [this gist](https://gist.github.com/rob-derosa/240dd977d41ebc58f633dbdf009d5e63)
 1. Build and run your project locally
@@ -268,7 +268,7 @@ Now that we have a custom vision project with at least 4 trained models, we can 
 1. Click on the __Browse__ tab and search for __CustomVision__
 1. Select the __Microsoft.Cognitive.CustomVision.Prediction__ and change the version dropdown to v1.0.0 and click __Install__
 1. Select the __Microsoft.Cognitive.CustomVision.Training__ and change the version dropdown to v1.0.0 and click __Install__
-1. In MakePrediction.cs, replace the code within the `try` clause with the code in [this gist](https://gist.github.com/rob-derosa/07952c26d0bc7e78b974cae5ddec1485)
+1. In `MakePrediction.cs`, replace the code within the `try` clause with the code in [this gist](https://gist.github.com/rob-derosa/07952c26d0bc7e78b974cae5ddec1485)
 1. Add the missing using statements
 1. Add your project ID and training key to lines 30 and 31
    1. To get your custom vision project ID and training key, go to your project at http://customvision.ai
@@ -284,12 +284,12 @@ Now that we have a custom vision project with at least 4 trained models, we can 
 
 ### Step 12: Connect the mobile front-end to the Functions backend
 
-__Note:__ If you are unable to build and deploy the mobile app, skip to Step 12.b to install the app directly on your iOS or Android device.
+__Note:__ If you are unable to build and deploy the mobile app, skip to Step [12.b](#step-12b-install-a-prebuilt-version-of-the-mobile-app) to install the app directly on your iOS or Android device.
 
 __Note:__ You can build the mobile front end using either Visual Studio for Windows or Visual Studio for Mac. If you are targeting iOS, you must have a Mac - either as the main IDE or bridged to your PC running Visual Studio for Windows.
 
-1. In another instance of Visual Studio, open the MyMobileApp.sln file sitting in the root folder - this will open a Xamarin Forms project targeting iOS and Android
-1. Open the App.xaml.cs file and set your Azure Function endpoint on line 17.
+1. In another instance of Visual Studio, open the __MyMobileApp.sln__ file sitting in the root folder - this will open a Xamarin Forms project targeting iOS and Android
+1. Open the `App.xaml.cs` file and set your Azure Function endpoint on line 17.
 1. Right-click on either the iOS or Android project and select __Set as Startup Project__, then click __Rebuild__
 1. Select a device or emulator from the drop-down list in the top toolbar and click the Start Debug button
    - It can take several minutes to compile and begin the debugging session
@@ -332,8 +332,8 @@ __Note:__ This step is for those that cannot build the mobile app - it is config
 1. Because we are using a RESTful approach to the URLs, we need to modify the host.json file to remove the default route prefix of `api/`
    1. Open the __host.json__ file and add the following code from [this gist](https://gist.github.com/rob-derosa/3505273e2948429397d23c87b2ea34c8)
    1. This will make it so our `GetPredictions` function does not have to have the api prefix (eg `api/123456-7890-...`)
-   1. But now that our route prefix no longer has the default `api/`, we need to update our MakePrediction.cs function route to make up for that.
-      1. Open the MakePrediction.cs file and change the `Route` property in the `HttpTrigger` attribute from `null` to `"api/MakePrediction"`
+   1. But now that our route prefix no longer has the default `api/`, we need to update our `MakePrediction.cs` function route to make up for that.
+      1. Open the `MakePrediction.cs` file and change the `Route` property in the `HttpTrigger` attribute from `null` to `"api/MakePrediction"`
 1. Build and run your project locally
 1. Verify the `GetPredictions` function using Postman by making a `GET` request to your function
 1. Set your endpoint in the address bar (e.g. `http://localhost:7071/myDatabaseId/myCollectionId`)
@@ -366,7 +366,7 @@ t
    <br/><img src="resources/vs_disable_justmycode.png" width="75%" />
 1. In Visual Studio 2017, open the Server Explorer window: View > Server Explorer
 1. Expand your Azure subscription node > App Service > YourResourceGroup > YourFunctionsApp
-1. Right Click on YourFunctionsApp node and select Attach Debugger
+1. Right Click on __YourFunctionsApp__ node and select Attach Debugger
 <br/><img src="resources/vs_attach_debugger.png" width="50%" />
 1. Set a breakpoint in code where you want the debugger to pause
 

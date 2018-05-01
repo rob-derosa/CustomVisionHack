@@ -14,6 +14,6 @@ namespace MyMobileApp.Common
 			MainPage = new MainPage();
 		}
 
-		public static string AzureFunctionsUrl;
+        public static string AzureFunctionsUrl = "https://myfunctionsapp.azurewebsites.net";
 	}
 }
