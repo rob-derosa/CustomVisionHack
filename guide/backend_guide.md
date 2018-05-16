@@ -42,7 +42,7 @@ __A few notes on Custom Vision__
 1. [Generate a Shared Access Signature for your Storage Account](#step-6-generate-a-shared-access-signature-for-your-storage-account)
 1. [Upload an image/byte[] to your blob storage account](#step-7-upload-an-imagebyte-to-your-blob-storage-account)
 1. [Create a Azure Cosmos DB account](#step-8-create-a-azure-cosmos-db)
-1. [Write a document to your Cosmos SQL Database](#step-9-write-a-document-to-your-cosmos-sql-database)
+1. [Write a document to your Cosmos DocumentDB Database](#step-9-write-a-document-to-your-cosmos-documentdb-database)
 1. [Set up your own Custom Vision project and train a classifier](#step-10-set-up-your-own-custom-vision-project-and-train-a-classifier)
 1. [Make a prediction with Custom Vision and log the results](#step-11-make-a-prediction-with-custom-vision-and-log-the-results)
 1. [Connect the mobile front-end to the Functions backend](#step-12-connect-the-mobile-front-end-to-the-functions-backend)
@@ -196,7 +196,7 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
 1. It can take a few minutes before this process completes
 
 
-### Step 9: Write a document to your Cosmos SQL Database
+### Step 9: Write a document to your Cosmos DocumentDB Database
 
 1. Back in Visual Studio, right-click on the project's __Dependencies__ node and choose __Manage Nuget Packages...__
 1. Click on the __Browse__ tab and search for __DocumentDB__
