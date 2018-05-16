@@ -24,10 +24,11 @@ __A few notes on Custom Vision__
 #### Recommended tools
 
 1. (Required) [Visual Studio 2017](https://www.visualstudio.com/downloads/) with the following packages installed:
-   - Mobile Development with .NET
+   - Mobile Development with .NET (Xamarin)
    - Azure Development
    - (Extension) Azure Functions and Web Jobs Tools version 15.0.31201.0 or higher
-1. [Visual Studio for Mac](https://www.visualstudio.com/downloads/) (optional for Android, required for iOS)
+   * If you run into issues with Visual Studio, please see [this guide](https://github.com/rob-derosa/CustomVisionHack/blob/master/guide/xamarin_setup_guide.pdf) to assist with using a Virtual Machine with Visual Studio 2017 pre-installed (MSDN subscription required)
+1. [Visual Studio for Mac](https://www.visualstudio.com/downloads/) (optional for Android, required for iOS if you want to build out the mobile client which is optional)
 1. [Postman](https://www.getpostman.com/)
 
 
@@ -107,7 +108,7 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
 
 ### Step 4: Publish your app to the cloud and verify
 
-1. Right-click on your Functions project and select __Publish...__, then click the __Start__ button
+1. Right-click on your Functions project and select __Publish...__ then click the __Start__ button
 1. Select __Azure Function App__ and __Select Existing__
 1. Click the Settings icon and select __Create Profile__
 1. Click the __Create Profile__ button
