@@ -12,7 +12,7 @@ __A few notes on Custom Vision__
    - Only test against objects/models that exist within your project - you may get misfires if you test against an object you have not trained
 
 
-#### This hackathon excercises the following platforms or services
+#### This hackathon exercises the following platforms or services
 
 1. Visual Studio 2017
 1. Xamarin (Xamarin.Forms)
@@ -29,6 +29,7 @@ __A few notes on Custom Vision__
    - (Extension) Azure Functions and Web Jobs Tools version 15.0.31201.0 or higher
 1. [Visual Studio for Mac](https://www.visualstudio.com/downloads/) (optional for Android, required for iOS)
 1. [Postman](https://www.getpostman.com/)
+
 
 ### Table of Contents
 
@@ -106,7 +107,7 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
 
 ### Step 4: Publish your app to the cloud and verify
 
-1. Right-click on your Functions project and select __Publish...__
+1. Right-click on your Functions project and select __Publish...__, then click the __Start__ button
 1. Select __Azure Function App__ and __Select Existing__
 1. Click the Settings icon and select __Create Profile__
 1. Click the __Create Profile__ button
@@ -169,7 +170,7 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
 1. Select the __WindowsAzure.Storage__ v9.1.1 package and click __Install__
 1. Follow the instructions in [this gist](https://gist.github.com/rob-derosa/87e59e3dac93882f29f8fd4fa246ff3d)
 1. Add the missing using statements
-1. Back in Visual Studio, update the value of the `endpoint` variable to incorporate both your storage SAS URL __AND THE CONTAINER NAME__ - you need to ensure the URL you copy and paste incorporates the `{containerName}` code after the `.net/` and before the `?sv=2018...`, otherwise you'll likely see a 404 error (e.g. `https://mynewstorageaccountblob.blob.core.windows.net/`__`{containerName}`__`?sv=2017-07-29&ss=b&srt=sco`...)
+1. Back in Visual Studio, update the value of the `endpoint` variable to incorporate both your storage SAS URL __AND THE CONTAINER NAME__ - you need to ensure the URL you copy and paste incorporates the `{containerName}` code after the `.net/` and before the `?sv=2018...`, otherwise you'll likely see a 404 error (e.g. `https://mynewstorageaccountblob.blob.core.windows.net/{containerName}?sv=2017-07-29&ss=b&srt=sco`...)
 1. Build and run the project locally
 1. Verify this by using Postman to send a POST request to your local endpoint
     1. Set the method dropdown to `POST`
