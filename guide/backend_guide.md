@@ -171,7 +171,7 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
 1. Select the __WindowsAzure.Storage__ v9.1.1 package and click __Install__
 1. Follow the instructions in [this gist](https://gist.github.com/rob-derosa/87e59e3dac93882f29f8fd4fa246ff3d)
 1. Add the missing using statements by hovering over the red squiggly-lined class until a light bulb appears. Click on the light bulb and select the corresponding namespace 
-<br/><img src="resources/vs_add_using_statements.png" width="400">
+<br/><img src="resources/vs_add_using_statements.png" width="500">
 1. Back in Visual Studio, update the value of the `endpoint` variable to incorporate both your storage SAS URL __AND THE CONTAINER NAME__ - you need to ensure the URL you copy and paste incorporates the `{containerName}` code after the `.net/` and before the `?sv=2018...`, otherwise you'll likely see a 404 error (e.g. `https://mynewstorageaccountblob.blob.core.windows.net/{containerName}?sv=2017-07-29&ss=b&srt=sco`...)
 1. Build and run the project locally
 1. Verify this by using Postman to send a POST request to your local endpoint
