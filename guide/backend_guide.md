@@ -180,7 +180,7 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
     1. Set the body content by selecting the __Body__ tab and choose the __binary__ option
     1. Choose a local image file to send
     1. Send the request and verify a URL comes back
-    1. Copy and past this URL into a browser and validate the image is the one you posted
+    1. Copy and paste this URL into a browser and validate the image is the one you posted
       1. Note: you can also verify in the Azure portal by clicking __Browse blobs__ and selecting the __images__ container
 1. Publish to the cloud and verify this remotely following the steps outlined above
 
