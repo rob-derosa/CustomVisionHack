@@ -48,7 +48,7 @@ __A few notes on Custom Vision__
 1. [Add another function that returns a list of past predictions](#step-13-add-another-function-that-returns-a-list-of-past-predictions)
 1. [Add a new tabbed page to the mobile app and display a list of past predictions](#step-14-add-a-new-tabbed-page-to-the-mobile-app-and-display-a-list-of-past-predictions)
 
-#### Azure Portal Tips
+#### Azure Portal Common Fields
 
 - __Name__: All resources will require a unique name and almost always impose some limitations on the characters allowed. In many cases, this also serves as part of the host name. For example, the name `myfunctionsapp` would equate to `http://myfunctionsapp.azurewebsites.net` 
 - __Subscription__: Select your Azure subscription in the dropdown list - this is where any services you use will be billed.
@@ -146,7 +146,8 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
 
 > __Note:__ We use a SAS URL to grant read/write access for a specified amount of time. We'll be using this from within a function.
 
-1. Go to your storage account 1. you can search for this or go to Resource Groups > select yours > click on your storage account in the list
+1. Go to your storage account
+   1. you can search for this or go to Resource Groups > select yours > click on your storage account in the list
 1. Click on Shared Access Signature
 1. Leave the default settings as is but ensure the __End Date__ is set to 24hrs from now or however long you want the Functions App to have access
 1. Click the __Generate SAS__ button
@@ -162,11 +163,13 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
 1. Also change the value of the `FunctionName` attribute to `nameof(MakePrediction)` - this essentially just passes in the name of the method as a string to define our endpoint equivalant to `"MakePrediction"`
 1. In the method signature, change the HttpTrigger methods params from `"post", "get"` to just `"post"`
 1. Right-click on the project's __Dependencies__ node and choose __Manage Nuget Packages...__
-1. Click on the __Browse__ tab and search for __Azure Storage__
-1. Select the __WindowsAzure.Storage__ and change the version dropdown to v8.3.0 and click __Install__
+1. Click on the __Browse__ tab and search for `Newtonsoft`
+1. Select the __Newtonsoft.Json__ v11.0.2 package and click __Install__
+1. Click on the __Browse__ tab and search for `Azure Storage`
+1. Select the __WindowsAzure.Storage__ v9.1.1 package and click __Install__
 1. Follow the instructions in [this gist](https://gist.github.com/rob-derosa/87e59e3dac93882f29f8fd4fa246ff3d)
 1. Add the missing using statements
-1. Back in Visual Studio, update line 43 to incorporate both your storage SAS URL __AND THE CONTAINER NAME__ - you need to ensure the URL you copy and paste incorporates the `{containerName}` code after the `.net/` and before the `?sv=2018...`, otherwise you'll likely see a 404 error
+1. Back in Visual Studio, update the value of the `endpoint` variable to incorporate both your storage SAS URL __AND THE CONTAINER NAME__ - you need to ensure the URL you copy and paste incorporates the `{containerName}` code after the `.net/` and before the `?sv=2018...`, otherwise you'll likely see a 404 error (e.g. `https://mynewstorageaccountblob.blob.core.windows.net/`__`{containerName}`__`?sv=2017-07-29&ss=b&srt=sco`...)
 1. Build and run the project locally
 1. Verify this by using Postman to send a POST request to your local endpoint
     1. Set the method dropdown to `POST`
@@ -182,10 +185,10 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
 ### Step 8: Create a Azure Cosmos DB account
 
 1. Once again, browse to [https://portal.azure.com](https://portal.azure.com)
-1. In the top left, click Create Resource > Databases > Azure Cosmos DB
+1. In the top left, click __Create Resource > Databases > Azure Cosmos DB__
 <br/><img src="resources/portal_create_new_cosmos_database.png" />
 1. Complete the new resource [common form fields](#azure-portal-tips)
-1. Choose the `SQL` from the API dropdown 1. this will use DocumentDB under the hood
+1. Choose the `SQL` from the API dropdown - this will use DocumentDB under the hood
 1. Click __Create__ to create the Cosmos DB
 <br/><img src="resources/portal_create_new_cosmos_database_settings.png" />
 1. It can take a few minutes before this process completes
@@ -195,8 +198,8 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
 
 1. Back in Visual Studio, right-click on the project's __Dependencies__ node and choose __Manage Nuget Packages...__
 1. Click on the __Browse__ tab and search for __DocumentDB__
-1. Select the __Microsoft.Azure.DocumentDB.Core__ and ensure version 1.7.1 is selected and click __Install__
-1. Add the `MyCommonLibrary` project to your solution - this project contains model classes that we will share between our front and back ends
+1. Select the __Microsoft.Azure.DocumentDB.Core__ v1.9.1 package and click __Install__
+1. Add the `MyCommonLibrary` project to your solution - this project contains model classes that we will share between our front (mobile app) and back (Functions app) ends
    1. Right-click on the solution and select Add > Existing Project... and navigate to the parent folder and select `MyCommonLibrary.csproj`
 1. Add a reference to the `MyCommonLibrary` project to your Function App project
    - __Note:__ This is a .NET Standard library that contains classes/models shared between the front and back ends
@@ -212,7 +215,7 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
 1. Check out the method `EnsureDatabaseConfigured` - it's responsible for creating your database and collection if either do not exist
 1. Now we need to get some values from the Azure Portal, such as our database URL and SAS key
    1. In the Azure portal, navigate to your Cosmos DB
-   1. Click on Keys
+   1. Click on __Keys__
    1. In the Read-write Keys tab, copy the URI and paste it as the value of `_databaseUrl` in `CosmosDataService.cs`
    1. In the Read-write Keys tab, copy the Primary Key and paste it as the value of `_databaseKey` in `CosmosDataService.cs`
 <br/><img src="resources/portal_cosmos_keys.png" />
@@ -228,7 +231,7 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
 
 In this step, we will create a new Custom Vision project and classify a few different models (objects) by uploading various photos of the models with associated tags. Then we will train the classifier to identify/predict those objects with a probability against each tag.
 
-1. Browse to http://customvision.ai and sign-in to create a new project
+1. Browse to [http://customvision.ai](http://customvision.ai) and sign-in to create a new project
 1. Click the __New Project__ button
 1. Complete the form by choosing a name for your project, such as __ShoesProject__
 1. You can leave the Domain as General and click the __Create project__ button
@@ -243,8 +246,8 @@ In this step, we will create a new Custom Vision project and classify a few diff
    1. You will be asked to add some tags to the images you are uploading - enter at least 2 tags
    1. Click the __Upload files__ button and verify your model was tagged properly by checking the boxes of those specific tags and validating the image count
    <br/><img src="resources/portal_cv_add_tags.png" width="75%" />
-   1. Repeat this process to until you have at least 4 total models with at least 2 tag each
-1. Once you have at least 4 models, click the Train Iteration button at the top
+   1. Repeat this process to until you have at least 4 total models with at least 2 tags each
+1. Once you have at least 4 models, click the __Train Iteration__ button at the top
 1. This will train your first iteration of the classifier (iterations are versioned and each project can have a default iteration)
 <br/><img src="resources/portal_cv_train_iteration.png" width="75%" />
 1. Let's test out this iteration running a quick test - start by clicking the __Quick Test__ button at the top
@@ -266,13 +269,14 @@ Now that we have a custom vision project with at least 4 trained models, we can 
 
 1. In Visual Studio, right-click on your Azure Functions project's __Dependencies__ node and choose __Manage Nuget Packages...__
 1. Click on the __Browse__ tab and search for __CustomVision__
-1. Select the __Microsoft.Cognitive.CustomVision.Prediction__ and change the version dropdown to v1.0.0 and click __Install__
-1. Select the __Microsoft.Cognitive.CustomVision.Training__ and change the version dropdown to v1.0.0 and click __Install__
+1. Select the __Microsoft.Cognitive.CustomVision.Prediction__ v1.2.0 package and click __Install__
+1. Select the __Microsoft.Cognitive.CustomVision.Training__ v1.2.0 package and click __Install__
+1. Search for __Microsoft.Rest.ClientRuntime__ and install package v2.3.11
 1. In `MakePrediction.cs`, replace the code within the `try` clause with the code in [this gist](https://gist.github.com/rob-derosa/07952c26d0bc7e78b974cae5ddec1485)
 1. Add the missing using statements
-1. Add your project ID and training key to lines 30 and 31
-   1. To get your custom vision project ID and training key, go to your project at http://customvision.ai
-   1. Navigate to the project settings and you'll find your project ID and training key
+1. Set the value of the `prediction.ProjectId` to your custom vision project ID and the value of `prediction.PredictionKey` to your custom vision project's prediction key
+   1. To get your custom vision project ID and prediction key, go to your project at http://customvision.ai
+   1. Navigate to the project settings and you'll find your project ID and prediction key
    <br/><img src="resources/portal_cv_settings.png" width="75%" />
 1. You've just added a chunk of code that will now run a prediction against the image you upload and return a list of resulting tags and their probability
 1. Build and run locally
@@ -289,12 +293,12 @@ __Note:__ If you are unable to build and deploy the mobile app, skip to Step [12
 __Note:__ You can build the mobile front end using either Visual Studio for Windows or Visual Studio for Mac. If you are targeting iOS, you must have a Mac - either as the main IDE or bridged to your PC running Visual Studio for Windows.
 
 1. In another instance of Visual Studio, open the __MyMobileApp.sln__ file sitting in the root folder - this will open a Xamarin Forms project targeting iOS and Android
-1. Open the `App.xaml.cs` file and set your Azure Function endpoint on line 17.
+1. Open the `App.xaml.cs` file in the __MyMobileApp.Common__ project and set your Azure Function endpoint on line 17.
 1. Right-click on either the iOS or Android project and select __Set as Startup Project__, then click __Rebuild__
 1. Select a device or emulator from the drop-down list in the top toolbar and click the Start Debug button
    - It can take several minutes to compile and begin the debugging session
 1. Once your debugging session begins, if using an actual device:
-   1. Tap the __Take Photo__ button to take a photo and snap a pic of one of the 4 models you have trainied your classifier on
+   1. Tap the __Take Photo__ button to take a photo and snap a pic of one of the 4 models you have trainied your classifier against
    1. Tap the __Make Prediction__ button
 1. If you are using an emulator and cannot use a camera:
       1. Using the browser in the emulator, search for one of the 4 models you have trainied your classifier on
@@ -309,7 +313,7 @@ __Note:__ You can build the mobile front end using either Visual Studio for Wind
 
 __Note:__ This step is for those that cannot build the mobile app - it is configurable to point to any Azure endpoint
 
-1. On the device you want to install the app on, navigate [here for iOS](https://install.appcenter.ms/users/robd/apps/custom-vision-hack/distribution_groups/public) or [here for Android](https://install.appcenter.ms/users/robd/apps/custom-vision-hack-1/distribution_groups/public)
+1. On the device you want to install the app, navigate [here for iOS](https://install.appcenter.ms/users/robd/apps/custom-vision-hack/distribution_groups/public) or [here for Android](https://install.appcenter.ms/users/robd/apps/custom-vision-hack-1/distribution_groups/public)
 1. Click on the __Install__ button
 1. If the device is iOS:
    1. You will need to trust the enterprise signing certificate by by opening the Settings App
@@ -356,7 +360,6 @@ __Note:__ This step is for those that cannot build the mobile app - it is config
 1. Rebuild the project, deploy to your device and select the new tab you just created
 1. You should see a list of photos with their matching tags 
 
-t
 
 #### Attaching a remote debugger to your Azure Functions App
 
@@ -374,10 +377,12 @@ t
 #### References
 
 - [Azure Functions](https://azure.microsoft.com/en-us/services/functions/)
-- Cosmos DB
-- Custom Vision
+- [Cosmos DB](https://azure.microsoft.com/en-us/services/cosmos-db/)
+- [Xamarin.Forms](http://xamarin.com/forms)
+- [Custom Vision](https://azure.microsoft.com/en-us/services/cognitive-services/custom-vision-service/)
    - [Web Portal](http://customvision.ai)
    - [C# API](https://docs.microsoft.com/en-us/azure/cognitive-services/custom-vision-service/csharp-tutorial)
    - [REST API - Prediction](https://go.microsoft.com/fwlink/?linkid=865445)
    - [REST API - Training](https://go.microsoft.com/fwlink/?linkid=865446)
    - [Tips on improving classifiers](https://docs.microsoft.com/en-us/azure/cognitive-services/custom-vision-service/getting-started-improving-your-classifier)
+- [Azure Storage Explorer](https://azure.microsoft.com/en-us/features/storage-explorer/)
