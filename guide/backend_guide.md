@@ -131,7 +131,7 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
 1. Once again, browse to [https://portal.azure.com](https://portal.azure.com)
 1. Click __Create Resource__ from the menu on the left of the page, then search for __Storage Account__ and click __Create__
 <br/><img src="resources/portal_create_new_storage_account.png" width="75%" />
-1. Complete the new resource [common form fields](#azure-portal-tips)
+1. Complete the new resource [common form fields](#azure-portal-common-fields)
 1. From the __Account Kind__ dropdown, select __Blob__
 1. Click __Create__ to create the Storage Account
 <br/><img src="resources/portal_create_new_storage_account_settings.png" width="75%" />
@@ -187,7 +187,7 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
 1. Once again, browse to [https://portal.azure.com](https://portal.azure.com)
 1. In the top left, click __Create Resource > Databases > Azure Cosmos DB__
 <br/><img src="resources/portal_create_new_cosmos_database.png" />
-1. Complete the new resource [common form fields](#azure-portal-tips)
+1. Complete the new resource [common form fields](#azure-portal-common-fields)
 1. Choose the `SQL` from the API dropdown - this will use DocumentDB under the hood
 1. Click __Create__ to create the Cosmos DB
 <br/><img src="resources/portal_create_new_cosmos_database_settings.png" />
@@ -246,7 +246,7 @@ In this step, we will create a new Custom Vision project and classify a few diff
    1. You will be asked to add some tags to the images you are uploading - enter at least 2 tags
    1. Click the __Upload files__ button and verify your model was tagged properly by checking the boxes of those specific tags and validating the image count
    <br/><img src="resources/portal_cv_add_tags.png" width="75%" />
-   1. Repeat this process to until you have at least 4 total models with at least 2 tags each
+   1. Repeat this process to until you have at least 4 total models with at least 2 tags each - the classifier gets smarter as you add more models
 1. Once you have at least 4 models, click the __Train Iteration__ button at the top
 1. This will train your first iteration of the classifier (iterations are versioned and each project can have a default iteration)
 <br/><img src="resources/portal_cv_train_iteration.png" width="75%" />
@@ -386,3 +386,4 @@ __Note:__ This step is for those that cannot build the mobile app - it is config
    - [REST API - Training](https://go.microsoft.com/fwlink/?linkid=865446)
    - [Tips on improving classifiers](https://docs.microsoft.com/en-us/azure/cognitive-services/custom-vision-service/getting-started-improving-your-classifier)
 - [Azure Storage Explorer](https://azure.microsoft.com/en-us/features/storage-explorer/)
+- [Xamarin Mobile App Hack](https://github.com/dwhathaway/CustomVisionHack/blob/mobile-app-hack/guide/mobile_app_guide.md)
