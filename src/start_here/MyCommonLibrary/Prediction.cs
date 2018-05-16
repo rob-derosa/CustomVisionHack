@@ -8,7 +8,7 @@ namespace MyCommonLibrary
     public class Prediction : BaseModel
     {
         public string ProjectId { get; set; }
-        public string TrainingKey { get; set; }
+        public string PredictionKey { get; set; }
         public string ImageUrl { get; set; }
         public string UserId { get; set; }
         public DateTime? TimeStamp { get; set; }
