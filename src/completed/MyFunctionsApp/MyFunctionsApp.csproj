@@ -3,11 +3,16 @@
     <TargetFramework>net461</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="1.7.1" />
-    <PackageReference Include="Microsoft.Cognitive.CustomVision.Prediction" Version="1.0.0" />
-    <PackageReference Include="Microsoft.Cognitive.CustomVision.Training" Version="1.0.0" />
-    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.6" />
-    <PackageReference Include="WindowsAzure.Storage" Version="8.3.0" />
+    <Compile Remove="AddModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="1.9.1" />
+    <PackageReference Include="Microsoft.Cognitive.CustomVision.Prediction" Version="1.2.0" />
+    <PackageReference Include="Microsoft.Cognitive.CustomVision.Training" Version="1.2.0" />
+    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.13" />
+    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.11" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="WindowsAzure.Storage" Version="9.1.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyCommonLibrary\MyCommonLibrary.csproj" />

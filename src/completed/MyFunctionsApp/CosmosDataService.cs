@@ -99,7 +99,7 @@ namespace MyFunctionsApp
                 var result = _client.CreateDocumentQuery<T>(GetCollectionUri()).ToList();
                 return result;
             }
-            catch (DocumentClientException dce)
+            catch (DocumentClientException)
             {
                 return null;
             }

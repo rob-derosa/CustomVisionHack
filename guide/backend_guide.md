@@ -41,7 +41,7 @@ __A few notes on Custom Vision__
 1. [Create your Storage Account (Blob)](#step-5-create-your-storage-account-blob)
 1. [Generate a Shared Access Signature for your Storage Account](#step-6-generate-a-shared-access-signature-for-your-storage-account)
 1. [Upload an image/byte[] to your blob storage account](#step-7-upload-an-imagebyte-to-your-blob-storage-account)
-1. [Create a Azure Cosmos DB account](#step-8-create-a-azure-cosmos-db)
+1. [Create an Azure Cosmos DB account](#step-8-create-an-azure-cosmos-db)
 1. [Write a document to your Cosmos DocumentDB Database](#step-9-write-a-document-to-your-cosmos-documentdb-database)
 1. [Set up your own Custom Vision project and train a classifier](#step-10-set-up-your-own-custom-vision-project-and-train-a-classifier)
 1. [Make a prediction with Custom Vision and log the results](#step-11-make-a-prediction-with-custom-vision-and-log-the-results)
@@ -185,7 +185,7 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
 1. Publish to the cloud and verify this remotely following the steps outlined above
 
 
-### Step 8: Create a Azure Cosmos DB account
+### Step 8: Create an Azure Cosmos DB account
 
 1. Once again, browse to [https://portal.azure.com](https://portal.azure.com)
 1. In the top left, click __Create Resource > Databases > Azure Cosmos DB__
@@ -197,20 +197,20 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
 1. It can take a few minutes before this process completes
 
 
-### Step 9: Write a document to your Cosmos SQL Database
+### Step 9: Write a document to your Cosmos DocumentDB Database
 
 1. Back in Visual Studio, right-click on the project's __Dependencies__ node and choose __Manage Nuget Packages...__
 1. Click on the __Browse__ tab and search for __DocumentDB__
 1. Select the __Microsoft.Azure.DocumentDB.Core__ v1.9.1 package and click __Install__
 1. Add the `MyCommonLibrary` project to your solution - this project contains model classes that we will share between our front (mobile app) and back (Functions app) ends
-   1. Right-click on the solution and select Add > Existing Project... and navigate to the parent folder and select `MyCommonLibrary.csproj`
+   1. Right-click on the solution and select __Add > Existing Project...__ and navigate to the parent folder and select `MyCommonLibrary.csproj`
 1. Add a reference to the `MyCommonLibrary` project to your Function App project
    - __Note:__ This is a .NET Standard library that contains classes/models shared between the front and back ends
-   1. Right click on the Dependencies node of the Functions app and select Add Reference...
+   1. Right click on the __Dependencies__ node of the Functions app and select __Add Reference...__
    1. On the left side, choose Projects and check the box next to `MyCommonLibrary`
    1. Click the __OK__ button
    <br/><img src="resources/vs_add_reference_common.png" width="75%" />
-1. Right-click on the `MyCommonLibrary` project and select Rebuild
+1. Right-click on the `MyCommonLibrary` project and select __Rebuild__
 1. Right-click on your Functions app project and select __Add > Class...__ and name it `CosmosDataService.cs`
 1. Replace the empty class with the code from [this gist](https://gist.github.com/rob-derosa/d38e6a7c1bdba90b101a3e9ad7b6dfb6)
 1. Add the missing using statements

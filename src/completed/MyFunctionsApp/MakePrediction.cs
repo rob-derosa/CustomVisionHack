@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Host;
-using Microsoft.Cognitive.CustomVision;
-using Microsoft.Cognitive.CustomVision.Models;
+using Microsoft.Cognitive.CustomVision.Prediction;
+using Microsoft.Cognitive.CustomVision.Prediction.Models;
 using Microsoft.Rest;
 using Microsoft.WindowsAzure.Storage.Blob;
 using MyCommonLibrary;
@@ -29,28 +29,22 @@ namespace MyFunctionsApp
 				var stream = await req.Content.ReadAsStreamAsync();
 				var prediction = new Prediction
 				{
-					ProjectId = "YOURCUSTOMVISIONPROJECTID",  //36f167d1-82e0-45f4-8ddc-...
-					TrainingKey = "YOURCUSTOMVISIONTRAININGKEY",  //c63201c1e627428fb5c5d6...
+					ProjectId = "YOUR_PROJECT_ID", //This is the custom vision project we are predicting against
+					PredictionKey = "YOUR_PREDICTION_KEY", //This is the prediction key we are predicting against
 					TimeStamp = DateTime.UtcNow,
 					UserId = Guid.NewGuid().ToString(),
-					ImageUrl = await UploadImageToBlobStorage(stream)
+					ImageUrl = await UploadImageToBlobStorage(stream),
+					Results = new Dictionary<string, decimal>()
 				};
 
-				var api = new TrainingApi(new TrainingApiCredentials(prediction.TrainingKey));
-				var account = api.GetAccountInfo();
-				var predictionKey = account.Keys.PredictionKeys.PrimaryKey;
-
-				var creds = new PredictionEndpointCredentials(predictionKey);
-				var endpoint = new PredictionEndpoint(creds);
-
+				var endpoint = new PredictionEndpoint { ApiKey = prediction.PredictionKey };
 				//This is where we run our prediction against the default iteration
 				var result = endpoint.PredictImageUrl(new Guid(prediction.ProjectId), new ImageUrl(prediction.ImageUrl));
-				prediction.Results = new Dictionary<string, decimal>();
-				
+
 				// Loop over each prediction and write out the results
 				foreach(var outcome in result.Predictions)
 				{
-					if(outcome.Probability >= 0.0010)
+					if(outcome.Probability > .70)
 						prediction.Results.Add(outcome.Tag, (decimal)outcome.Probability);
 				}
 
@@ -93,7 +87,7 @@ namespace MyFunctionsApp
 				blockBlob.Properties.ContentType = "image/jpg";
 
 				//You can even store metadata with the content
-				blockBlob.Metadata.Add("createdFor", "This Awesome Hackathon");
+				blockBlob.Metadata.Add("createdFor", "This Custom Vision Hackathon");
 
 				//Upload and return the new URL associated w/ this blob content
 				await blockBlob.UploadFromStreamAsync(stream);
