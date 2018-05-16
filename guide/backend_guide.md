@@ -70,7 +70,7 @@ Make a local directory, and then clone the repo from [https://github.com/rob-der
 <br/><img src="resources/portal_create_new_functions_app.png" width="75%" />
 1. Enter in a name for the app (e.g. `myfunctionsapp` - this must be unique but don't worry, the portal will tell you if it's not)
 1. Because this is the very first resource we are creating, we need to create a new resource group
-1. Complete the new resource [common form fields](#azure-portal-tips)
+1. Complete the new resource [common form fields](#azure-portal-common-fields)
 1. Leave the rest of the settings as default
 1. Optionally, for easy access, click the __Pin to dashboard__ checkbox
 1. Click __Create__ to create your Function App
