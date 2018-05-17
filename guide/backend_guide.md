@@ -392,8 +392,7 @@ __Note:__ In this step, we'll cut the cord to Azure and bring the models down to
 1. Build and deploy to the device/OS of your choice
 1. Disable your cell/wifi connectivity to ensure you're not being sneakily tricked, snap a pic make a prediction
 1. Ideally, you'll see something similar to the following:
-<br/><img src="resources/ios_prediction_result.png" width="250" />
-<img src="resources/android_prediction_result.png" width="250" />
+<br/><img src="resources/ios_prediction_result.png" width="300" /><img src="resources/android_prediction_result.png" width="300" />
 
 
 #### Attaching a remote debugger to your Azure Functions App
