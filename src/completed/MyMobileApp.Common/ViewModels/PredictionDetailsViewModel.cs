@@ -1,8 +1,10 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Windows.Input;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
+using Xam.Plugins.OnDeviceCustomVision;
 using Xamarin.Forms;
 
 namespace MyMobileApp.Common
@@ -98,8 +100,16 @@ namespace MyMobileApp.Common
 			try
 			{
 				Status = "Analyzing picture...";
-				var result = await DataStore.Instance.MakePredictionAsync(_imageBytes);
-				Status = result == null ? "Bad request" : result.Description;
+				var tags = await CrossImageClassifier.Current.ClassifyImage(new MemoryStream(_imageBytes));
+
+				var description = "";
+				foreach(var tag in tags.Where(t => t.Probability > .70))
+					description += $"{tag.Tag} - {tag.Probability.ToString("P")}, ";
+
+				if(string.IsNullOrWhiteSpace(description))
+					description = "No tags found";
+
+				Status = description.Trim().TrimEnd(',');
 			}
 			catch (Exception e)
 			{
