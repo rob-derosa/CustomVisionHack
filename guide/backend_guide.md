@@ -49,6 +49,7 @@ __A few notes on Custom Vision__
    1. [Install a prebuilt version of the mobile app](#step-12b-install-a-prebuilt-version-of-the-mobile-app)
 1. [Add another function that returns a list of past predictions](#step-13-add-another-function-that-returns-a-list-of-past-predictions)
 1. [Add a new tabbed page to the mobile app and display a list of past predictions](#step-14-add-a-new-tabbed-page-to-the-mobile-app-and-display-a-list-of-past-predictions)
+1. [Make predictions locally (edge) using CoreML/TensorFlow](#step-15)
 
 #### Azure Portal Common Fields
 
@@ -364,6 +365,31 @@ __Note:__ This step is for those that cannot build the mobile app - it is config
 1. You should see a list of photos with their matching tags 
 
 
+### Step 15: Make predictions on the device (edge) using CoreML/TensorFlow
+
+__Note:__ In this step, we'll cut the cord to Azure and bring the models down to the bare metal. You will need iOS 11+ or Android API 21+.
+
+1. In the Custom Vision portal, click into your project then click on the __Settings__ button and change the Domain from __General__ to __General (compact)__ and click __Save__
+1. Now that the domain has changed, we need to train the classifier again so click the green __Train__ button at the top
+1. Once the training has completed, click on the __Performance__ tab and then click the __Export__ link
+1. Download the corresponding model for your mobile OS (__CoreML__ for iOS, __TensorFlow__ for Android)
+1. Back in Visual Studio, right-click on your MyMobileApp.Common project's __Dependencies__ node and choose __Manage Nuget Packages...__
+1. Click on the __Browse__ tab and search for __Xamarin CustomVision__
+1. Select the __Xam.Plugins.OnDeviceCustomVision__ v1.0.0 package and click __Install__ - this package will allow us to classify an image from a common API while still using the native frameworks to do so
+1. Repeat this process for the iOS and/or Android projects
+1. Add the exported model data to your mobile project(s)
+   - iOS: add the .mlmodel file you downloaded to the `Resources` folder in your iOS project
+   - Android: unzip the file you exported and add the `labels.txt` and `model.pb` file to the `Assets` folder in your Android project
+1. Initialize the Custom Vision package in your mobile project(s)
+   - iOS: Add this line ``CrossImageClassifier.Current.Init("<model_name>", ModelType.General);` to the `AppDelegate.cs` file just before the line `return base.FinishedLaunching(app, options);` where `<model_name>` is the name of the .mlmodel file without the extension
+   - Android: Add this line `CrossImageClassifier.Current.Init("model.pb", ModelType.General);` to the `MainActivity.cs` file just before the line `LoadApplication(new App());`
+1. In the `MyMobileApp.Common` project, open the `/ViewModels/PredictionDetailsViewModel.cs` file and replace the code inside the `try` block with [this code](https://gist.github.com/rob-derosa/a19e392bfe1d0670a7cb43a5116cd21c)
+   - This chunk of code will now employ the local device frameworks for ML against the compact model exported previously
+1. Add the missing using statements
+1. Build and deploy to the device/OS of your choice
+1. Disable your cell/wifi connectivity to ensure you're not being sneakily tricked, snap a pic make a prediction 
+
+
 #### Attaching a remote debugger to your Azure Functions App
 
 1. Before we can attach a remote debugger, we need to ensure the __Enable Just My Code__ option in the Debugging section is disabled
@@ -375,6 +401,7 @@ __Note:__ This step is for those that cannot build the mobile app - it is config
 1. Right Click on __YourFunctionsApp__ node and select Attach Debugger
 <br/><img src="resources/vs_attach_debugger.png" width="50%" />
 1. Set a breakpoint in code where you want the debugger to pause
+1. From here, you can either hover over the code you want to see values for or add the variable to the __Watch__ pad
 
 
 #### References
@@ -389,4 +416,5 @@ __Note:__ This step is for those that cannot build the mobile app - it is config
    - [REST API - Training](https://go.microsoft.com/fwlink/?linkid=865446)
    - [Tips on improving classifiers](https://docs.microsoft.com/en-us/azure/cognitive-services/custom-vision-service/getting-started-improving-your-classifier)
 - [Azure Storage Explorer](https://azure.microsoft.com/en-us/features/storage-explorer/)
+- [Custom Vision On Device Xamarin Plugin](https://github.com/jimbobbennett/Xam.Plugins.OnDeviceCustomVision)
 - [Xamarin Mobile App Hack](https://github.com/dwhathaway/CustomVisionHack/blob/mobile-app-hack/guide/mobile_app_guide.md)
