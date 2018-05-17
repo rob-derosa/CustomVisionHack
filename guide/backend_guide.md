@@ -384,8 +384,8 @@ __Note:__ In this step, we'll cut the cord to Azure and bring the models down to
    - iOS: add the .mlmodel file you downloaded to the `Resources` folder in your iOS project
    - Android: unzip the file you exported and add the `labels.txt` and `model.pb` file to the `Assets` folder in your Android project
 1. Initialize the Custom Vision package in your mobile project(s)
-   - iOS: Add this line ``CrossImageClassifier.Current.Init("<model_name>", ModelType.General);` to the `AppDelegate.cs` file just before the line `return base.FinishedLaunching(app, options);` where `<model_name>` is the name of the .mlmodel file without the extension
-   - Android: Add this line `CrossImageClassifier.Current.Init("model.pb", ModelType.General);` to the `MainActivity.cs` file just before the line `LoadApplication(new App());`
+   - iOS: Add this line ```CrossImageClassifier.Current.Init("<model_name>", ModelType.General);``` to the `AppDelegate.cs` file just before the line ```return base.FinishedLaunching(app, options);``` where `<model_name>` is the name of the .mlmodel file without the extension
+   - Android: Add this line ```CrossImageClassifier.Current.Init("model.pb", ModelType.General);``` to the `MainActivity.cs` file just before the line ```LoadApplication(new App());```
 1. In the `MyMobileApp.Common` project, open the `/ViewModels/PredictionDetailsViewModel.cs` file and replace the code inside the `try` block with [this code](https://gist.github.com/rob-derosa/a19e392bfe1d0670a7cb43a5116cd21c)
    - This chunk of code will now employ the local device frameworks for ML against the compact model exported previously
 1. Add the missing using statements
