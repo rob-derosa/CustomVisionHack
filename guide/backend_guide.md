@@ -390,7 +390,10 @@ __Note:__ In this step, we'll cut the cord to Azure and bring the models down to
    - This chunk of code will now employ the local device frameworks for ML against the compact model exported previously
 1. Add the missing using statements
 1. Build and deploy to the device/OS of your choice
-1. Disable your cell/wifi connectivity to ensure you're not being sneakily tricked, snap a pic make a prediction 
+1. Disable your cell/wifi connectivity to ensure you're not being sneakily tricked, snap a pic make a prediction
+1. Ideally, you'll see something similar to the following:
+<br/><img src="resources/ios_prediction_result.png" width="75%" />
+<img src="resources/ios_prediction_result.png" width="75%" />
 
 
 #### Attaching a remote debugger to your Azure Functions App
