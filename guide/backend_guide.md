@@ -309,7 +309,8 @@ __Note:__ You can build the mobile front end using either Visual Studio for Wind
       1. Save the image to your local photo library
       1. Launch the mobile app and tap on the __Take Picture__ button
       1. Select the image you downloaded in the previous step
-1. Ideally, a match will be found and the matching tags will be displayed
+1. Ideally, you'll see something similar to the following:
+<br/><img src="resources/ios_prediction_result.png" width="300" /> <img src="resources/android_prediction_result.png" width="300" />
 1. Click the Reset button in the top right to reset the data and make another prediction
 
 
@@ -327,7 +328,11 @@ __Note:__ This step is for those that cannot build the mobile app - it is config
    1. Go to the home screen and you should see the app installing/installed
 1. Launch the app and click on the Settings tab
 1. Enter your Functions App endpoint url in the textbox and tap Save (e.g. `http://myfunctionsapp.azurewebsites.net`)
-
+   1. Tap the __Take Photo__ button to take a photo and snap a pic of one of the 4 models you have trainied your classifier against
+   1. Tap the __Make Prediction__ button
+1. Ideally, you'll see something similar to the following:
+<br/><img src="resources/ios_prediction_result.png" width="300" /> <img src="resources/android_prediction_result.png" width="300" />
+1. Click the Reset button in the top right to reset the data and make another prediction
 
 ### Step 13: Add another function that returns a list of past predictions
 
@@ -392,7 +397,7 @@ __Note:__ In this step, we'll cut the cord to Azure and bring the models down to
 1. Build and deploy to the device/OS of your choice
 1. Disable your cell/wifi connectivity to ensure you're not being sneakily tricked, snap a pic make a prediction
 1. Ideally, you'll see something similar to the following:
-<br/><img src="resources/ios_prediction_result.png" width="300" />   <img src="resources/android_prediction_result.png" width="300" />
+<br/><img src="resources/ios_prediction_result.png" width="300" /> <img src="resources/android_prediction_result.png" width="300" />
 
 
 #### Attaching a remote debugger to your Azure Functions App
