@@ -49,7 +49,7 @@ __A few notes on Custom Vision__
    1. [Install a prebuilt version of the mobile app](#step-12b-install-a-prebuilt-version-of-the-mobile-app)
 1. [Add another function that returns a list of past predictions](#step-13-add-another-function-that-returns-a-list-of-past-predictions)
 1. [Add a new tabbed page to the mobile app and display a list of past predictions](#step-14-add-a-new-tabbed-page-to-the-mobile-app-and-display-a-list-of-past-predictions)
-1. [Make predictions locally (edge) using CoreML/TensorFlow](#step-15)
+1. [Make predictions locally (edge) using CoreML/TensorFlow](#step-15-make-predictions-on-the-device-edge-using-coremltensorflow)
 
 #### Azure Portal Common Fields
 
@@ -370,7 +370,7 @@ __Note:__ This step is for those that cannot build the mobile app - it is config
 __Note:__ In this step, we'll cut the cord to Azure and bring the models down to the bare metal. You will need iOS 11+ or Android API 21+.
 
 1. In the Custom Vision portal, click into your project then click on the __Settings__ button and change the Domain from __General__ to __General (compact)__ and click __Save__
-<br/><img src="resources/portal_cv_domain_compact.png" width="50%" />
+<br/><img src="resources/portal_cv_domain_compact.png" width="300" />
 1. Now that the domain has changed, we need to train the classifier again so click the green __Train__ button at the top
 1. Once the training has completed, click on the __Performance__ tab and then click the __Export__ link
 <br/><img src="resources/portal_cv_export.png" width="75%" />
