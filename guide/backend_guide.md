@@ -387,7 +387,7 @@ __Note:__ In this step, we'll cut the cord to Azure and bring the models down to
 1. Select the __Xam.Plugins.OnDeviceCustomVision__ v1.0.0 package and click __Install__ - this package will allow us to classify an image from a common API while still using the native frameworks to do so
 1. Repeat this process for the iOS and/or Android projects
 1. Add the exported model data to your mobile project(s)
-   - iOS: add the .mlmodel file you downloaded to the `Resources` folder in your iOS project
+   - iOS: rename the .mlmodel file you downloaded to something like `mymodel.mlmodel` and add it to the `Resources` folder in your iOS project
    - Android: unzip the file you exported and add the `labels.txt` and `model.pb` file to the `Assets` folder in your Android project
 1. Initialize the Custom Vision package in your mobile project(s)
    - iOS: Add this line ```CrossImageClassifier.Current.Init("<model_name>", ModelType.General);``` to the `AppDelegate.cs` file just before the line ```return base.FinishedLaunching(app, options);``` where `<model_name>` is the name of the .mlmodel file without the extension
